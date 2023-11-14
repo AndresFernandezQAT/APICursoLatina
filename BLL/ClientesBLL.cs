@@ -14,6 +14,28 @@ namespace APICurso.BLL
             _clientesRepository = clientesRepository;
         }
 
+        public async Task<ResponseCliente> ActualizarCliente(Cliente cliente)
+        {
+            try
+            {
+                var clienteactualizado = await _clientesRepository.ActualizarCliente(cliente);
+                ResponseCliente responseCliente = new ResponseCliente();
+                ResponseModel responseModel = new ResponseModel();
+                responseModel.errorcode = 0;
+                responseModel.errormsg = "Cliente actualizado con éxito";
+
+                responseCliente.cliente = clienteactualizado;
+                responseCliente.errores = responseModel;
+                return responseCliente;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<ResponseCliente> Crear(Cliente cliente)
         {
             try

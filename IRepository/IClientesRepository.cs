@@ -8,6 +8,8 @@ namespace APICurso.IRepository
         public Task<IEnumerable<Cliente>> ListaClientes();
 
         public Task<Cliente> ObtenerCliente(int id);
+        public Task<Cliente> ActualizarCliente(Cliente cliente);
+
 
     }
 }

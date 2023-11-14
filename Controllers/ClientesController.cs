@@ -83,6 +83,28 @@ namespace APICurso.Controllers
             }
         }
 
+        [AcceptVerbs("POST", "PUT")]
+        [Route("Actualizar")]
+        public async Task<ActionResult<ResponseCliente>> Actualizar(Cliente cliente)
+        {
+            try
+            {
+                var response = await _clientesBLL.ActualizarCliente(cliente);
+                return new JsonResult(response);
+            }
+            catch (Exception)
+            {
+
+                ResponseCliente responseCliente = new ResponseCliente();
+
+                ResponseModel responseModel = new ResponseModel();
+                responseModel.errorcode = -1;
+                responseModel.errormsg = "Error al actualizar el cliente";
+                responseCliente.errores = responseModel;
+                return new JsonResult(responseCliente);
+            }
+        }
+
     }
 }
         

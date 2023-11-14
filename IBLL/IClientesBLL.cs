@@ -7,6 +7,7 @@ namespace APICurso.IBLL
         public Task<ResponseCliente> Crear(Cliente cliente);
         public Task<ResponseListaClientes> ListaClientes();
         public Task<ResponseCliente> ObtenerCliente(int id);
+        public Task<ResponseCliente> ActualizarCliente(Cliente cliente);
 
     }
 }

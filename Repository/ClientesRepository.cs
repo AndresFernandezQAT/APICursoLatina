@@ -17,11 +17,36 @@ namespace APICurso.Repository
         {
             _context = context;
         }
+
+        public async Task<Cliente> ActualizarCliente(Cliente cliente)
+        {
+            try
+            {
+                var param = new DynamicParameters();
+                param.Add("@id", cliente.Id, DbType.String, ParameterDirection.Input);
+                param.Add("@nombre", cliente.Nombre, DbType.String, ParameterDirection.Input);
+                param.Add("@telefono", cliente.Telefono, DbType.String, ParameterDirection.Input);
+                param.Add("@contacto", cliente.Contacto, DbType.String, ParameterDirection.Input);
+
+                using (var conn = _context.CrearConexion())
+                {
+                    await conn.ExecuteAsync("actualizar_cliente", param, commandType: CommandType.StoredProcedure);
+                    return cliente;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<int> Crear(Cliente cliente)
         {
             try
             {
-                DynamicParameters param = new DynamicParameters();
+                var param = new DynamicParameters();
 
                 param.Add("@nombre", cliente.Nombre, DbType.String, ParameterDirection.Input);
                 param.Add("@telefono", cliente.Telefono, DbType.String, ParameterDirection.Input);
